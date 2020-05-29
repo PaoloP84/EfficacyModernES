@@ -1,0 +1,104 @@
+If you are here, all packages have been correctly installed... :)
+PLEASE READ THE FOLLOWING LINES BEFORE USING THIS CODE!!!!
+Run this script with python3.x, with x >= 5. Support for python2 is not guaranteed!!!
+You can run this script with the following command:
+
+python3.5 salimans.py
+
+In this case, you do not specify any arguments and the default settings are used (*)
+List of allowed arguments (please specify the full argument when required: e.g. opt [arg])
+-f [filename]             : the file containing the parameters (if not specified, the default settings are used)
+-s [integer]              : the number used to initialize the seed
+-n [integer]              : the number of replications to be run
+-t                        : flag used to test a pre-evolved policy
+-c                        : flag used to test the centroid of a pre-evolved policy
+-d [directory]            : the directory where all output files are stored (if not specified, we use the current directory)
+
+The configuration file (usually with extension .ini) consists of two main sections:
+
+1) [EVAL]: refers to the algorithm (i.e., ES) used to evolve controllers
+2) [POLICY]: concerns the policy (i.e., neural network) used to evaluate candidate solutions
+
+The .ini file contains the following [EVAL] and [POLICY] parameters:
+[EVAL]
+nevals [integer]          : number of evaluations
+numHiddens [integer]      : number of hiddens x layer
+numHiddenLayers [integer] : number of hidden layers
+id_algo [integer]         : ES: 0=xNES, 1=CMA-ES, 2=OpenAI-ES
+ntrials [integer]         : number of evaluation episodes
+stepsize [float]          : stepsize used to move the centroid by Adam optimizer
+biasCorr [0/1]            : whether or not the OpenAI-ES uses bias correction
+noiseStdDev [float]       : coefficient to be applied to samples (used only in OpenAI-ES)
+environment [string]      : environment used (task)
+sampleSize [integer]      : number of samples
+fullyRandom [0/1]         : whether or not the candidate solutions are evaluated in fully-random episodes
+storingRate [integer]     : frequency (in terms of number of generations) at which centroid and statistics are saved
+envChangeEvery [integer]  : frequency (in terms of number of generations) at which new evaluation episodes are generated (used only if <fullyRandom> flag is unset)
+
+[POLICY]
+out_type [integer]        : type of output: 0=continuous, 1=binary, >1=uniform with bins (the number indicates how many bins are used)
+connection_type [string]  : the type of neural network
+nonlin_type [string]      : the activation function of the neural network
+nonlin_out [0/1]          : whether or not the network outputs are linear
+init_type [string]        : the type of parameter's initialization
+ac_noise_std [float]      : the noise range to be applied to actions (if 0.0, actions are not stochastic)
+norm_inp [0/1]            : whether or not the input observations must be normalized
+
+This script contains three algorithms:
+1) CMA-ES
+2) xNES
+3) OpenAI-ES
+
+Currently it is possible to evolve controllers for the following tasks:
+
+1) swimmer [string 'Swimmer-v2']
+2) hopper [string 'Hopper-v2']
+3) halfcheetah [string 'Halfcheetah-v2']
+4) walker2d [string 'Walker2d-v2']
+5) humanoid [string 'Humanoid-v2']
+6) bipedal walker [string 'BipedalWalker-v2']
+7) hardcore bipedal walker [string 'BipedalWalkerHardcore-v2']
+8) cart-pole [string 'CartPole-v0']
+9) egg hand-manipulation [string 'HandManipulateEgg-v0']
+10) block hand-manipulation [string 'HandManipulateBlock-v0']
+11) inverted pendulum [string 'InvertedPendulum-v2']
+12) inverted double-pendulum [string 'InvertedDoublePendulum-v2']
+
+We are going to add several other tasks :)
+
+Currently only feed-forward neural networks can be used, which are implemented through Tensorflow. We plan to extend to fully-recurrent neural networks :)
+Up until now we are able to manage either Box or Dict observation spaces. Furthermore, we can only deal with either Box or Discrete action spaces. We hope to extend this code to cope with all possible spaces... :)
+
+(*) Default settings:
+
+seed: 1
+num_replications: 1
+directory where files are stored is the directory containing this script
+
+[EVAL]
+
+nevals: 1000000
+numHiddens: 10
+numHiddenLayers: 1
+id_algo: 2 (i.e., OpenAI-ES)
+ntrials: 1
+stepsize: 0.01
+biasCorr: 1
+noiseStdDev: 0.02
+environment: 'CartPole-v0
+sampleSize: 20
+fullyRandom: 0
+storingRate: 10
+envChangeEvery: 1
+
+[POLICY]
+
+out_type: 0
+connection_type: ff
+nonlin_type: tanh
+nonlin_out: 1
+init_type: normc
+ac_noise_std: 0.0
+norm_inp: 0
+
+Enjoy!!! :)
