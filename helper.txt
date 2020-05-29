@@ -3,7 +3,7 @@ PLEASE READ THE FOLLOWING LINES BEFORE USING THIS CODE!!!!
 Run this script with python3.x, with x >= 5. Support for python2 is not guaranteed!!!
 You can run this script with the following command:
 
-python3.5 salimans.py
+python3.5 modern_es.py
 
 In this case, you do not specify any arguments and the default settings are used (*)
 List of allowed arguments (please specify the full argument when required: e.g. opt [arg])
