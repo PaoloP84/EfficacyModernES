@@ -1,3 +1,5 @@
+# EfficacyModernES
+
 Repository of the software used to run the experiments reported in the paper:
 
 Efficacy of modern neuro-evolutionary strategies for continuous control optimization
